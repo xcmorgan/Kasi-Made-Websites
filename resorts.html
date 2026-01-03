@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St Morgans Resort | Luxury Stay</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --soft-gold: #f1e5ac;
+            --bg-dark: #0a0a0a;
+            --card-bg: #141414;
+        }
+
+        /* Basic Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Garamond', serif;
+            background-color: var(--bg-dark);
+            color: #f0f0f0;
+            line-height: 1.8;
+            padding-bottom: 100px;
+            overflow-x: hidden;
+        }
+
+        /* NEW: Glass Navigation Menu */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 2000;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--gold);
+            transition: 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Header with Pool Image Background */
+        header {
+            height: 65vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), var(--bg-dark)), url('pool1.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            margin-top: 0;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--soft-gold);
+            margin-bottom: 1rem;
+        }
+
+        .tagline {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        /* Image Collage Grid */
+        .gallery-section {
+            max-width: 1200px;
+            margin: -50px auto 4rem;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(2, 250px);
+            gap: 20px;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+            filter: grayscale(30%);
+            transition: 0.5s ease;
+        }
+
+        .gallery-img:hover { 
+            filter: grayscale(0%); 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .img-large { grid-column: span 3; grid-row: span 2; }
+        .img-med { grid-column: span 3; }
+        .img-small-1 { grid-column: span 1.5; }
+        .img-small-2 { grid-column: span 1.5; }
+
+        /* Gold Fees Section */
+        .fees-container {
+            text-align: center;
+            padding: 4rem 20px;
+            border-top: 1px solid #222;
+        }
+
+        .fees-title {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 2rem;
+        }
+
+        .fee-text {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            color: var(--soft-gold);
+            font-weight: 200;
+        }
+
+        /* Room Selection Section */
+        .rooms-header {
+            text-align: center;
+            margin: 4rem 0 3rem;
+        }
+
+        .rooms-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .room-card {
+            flex: 1;
+            min-width: 300px;
+            background: var(--card-bg);
+            border-bottom: 3px solid var(--gold);
+            transition: 0.3s;
+        }
+
+        .room-card:hover { transform: translateY(-10px); }
+
+        .room-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .room-content { padding: 30px; }
+
+        .room-price {
+            font-family: 'Segoe UI', sans-serif;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 15px;
+        }
+
+        /* Fixed Bottom Action Bar */
+        .action-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid #333;
+            z-index: 1000;
+        }
+
+        .book-btn {
+            background: var(--gold);
+            color: #000;
+            text-decoration: none;
+            padding: 15px 60px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 2px;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .book-btn:hover {
+            background: var(--soft-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Toast Popup Message */
+        .popup-message {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(20, 20, 20, 0.98);
+            color: var(--soft-gold);
+            padding: 20px 30px;
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            z-index: 2000;
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .popup-message.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Footer & Disclaimer */
+        footer {
+            padding: 4rem 20px 120px;
+            text-align: center;
+            color: #444;
+            font-size: 0.8rem;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .example-label {
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            nav { gap: 1.5rem; }
+            .gallery-section { display: flex; flex-direction: column; }
+            .gallery-img { height: 250px; }
+            h1 { font-size: 2.5rem; letter-spacing: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="#" style="color: var(--gold); pointer-events: none;">Resorts</a>
+    </nav>
+
+    <header>
+        <p class="tagline">The Art of Living</p>
+        <h1>St Morgans Resort</h1>
+    </header>
+
+    <section class="gallery-section">
+        <img src="pool1.jpg" alt="Luxury Pool" class="gallery-img img-large">
+        <img src="pool2.jpg" alt="Resort View" class="gallery-img img-med">
+        <img src="trees.jpg" alt="Nature Trails" class="gallery-img img-small-1">
+        <img src="drinks.jpg" alt="Signature Cocktails" class="gallery-img img-small-2">
+    </section>
+
+    <div class="fees-container">
+        <p class="fees-title">Day Visitor Access</p>
+        <div class="fee-text">R150 Adults — R80 Children</div>
+    </div>
+
+    <div class="rooms-header">
+        <p class="tagline">Accommodations</p>
+        <h2 style="font-size: 2.5rem; font-weight: 300; color: var(--soft-gold);">Our Rooms</h2>
+    </div>
+
+    <section class="rooms-container">
+        <div class="room-card">
+            <img src="room1.jpg" class="room-img" alt="Deluxe Suite">
+            <div class="room-content">
+                <h3>The Grand Suite</h3>
+                <p>Pure comfort with designer finishes and garden access.</p>
+                <div class="room-price">R1900 / night</div>
+            </div>
+        </div>
+        <div class="room-card">
+            <img src="room2.jpg" class="room-img" alt="Executive Suite">
+            <div class="room-content">
+                <h3>Executive Ocean View</h3>
+                <p>Unmatched views of the morning sun over the water.</p>
+                <div class="room-price">R2300 / night</div>
+            </div>
+        </div>
+    </section>
+
+    <div id="examplePopup" class="popup-message">
+        <strong style="display: block; color: var(--gold); margin-bottom: 5px;">📍 PREVIEW MODE</strong>
+        This is a demonstration layout. No actual booking will be processed.
+        <span style="display: block; margin-top: 10px; font-size: 0.8rem; color: #888;">Popup will close in 5 seconds.</span>
+    </div>
+
+    <div class="action-bar">
+        <button id="bookBtn" class="book-btn">Book Your Stay</button>
+    </div>
+
+    <footer>
+        <p>Kasi-Made Webz 🇿🇦 | South Africa</p>
+        <p class="example-label">DISCLAIMER: This website is a functional design example created for Kasi-Made Webz portfolio. All images (pool1.jpg, pool2.jpg, trees.jpg, drinks.jpg, room1.jpg, room2.jpg) are placeholders.</p>
+    </footer>
+
+    <script>
+        const bookBtn = document.getElementById('bookBtn');
+        const popup = document.getElementById('examplePopup');
+        let isActive = false;
+
+        bookBtn.addEventListener('click', function() {
+            if (isActive) return; 
+
+            isActive = true;
+            popup.classList.add('show');
+
+            setTimeout(() => {
+                popup.classList.remove('show');
+                isActive = false;
+            }, 5000);
+        });
+    </script>
+
+</body>
+</html>

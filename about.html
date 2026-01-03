@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Kasi-Made Webz 🇿🇦</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7; 
+            color: #ffffff;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('buildings.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+
+        /* Professional Navigation - Matches index */
+        header {
+            background: rgba(255, 255, 255, 0.08); 
+            backdrop-filter: blur(20px);
+            padding: 1rem 0; 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 1.5rem;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+
+        .logo {
+            font-size: clamp(1.4rem, 4vw, 1.8rem); 
+            font-weight: 700; 
+            color: #ffffff;
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem;
+        }
+
+        .hamburger {
+            display: flex; 
+            flex-direction: column; 
+            gap: 4px; 
+            cursor: pointer;
+            padding: 8px; 
+            z-index: 1001; 
+            transition: all 0.3s ease;
+        }
+
+        .hamburger span {
+            width: 28px; 
+            height: 3px; 
+            background: #ffffff;
+            transition: all 0.3s ease; 
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        .nav-menu {
+            position: fixed; 
+            top: 0; 
+            right: -100%; 
+            width: 100%; 
+            max-width: 350px;
+            height: 100vh; 
+            background: rgba(0, 0, 0, 1); 
+            backdrop-filter: blur(20px);
+            padding: 6rem 1.5rem 2rem; 
+            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex; 
+            flex-direction: column; 
+            z-index: 2000;
+            box-shadow: -10px 0 50px rgba(0,0,0,0.8);
+        }
+
+        .nav-menu.active { right: 0; }
+
+        .nav-overlay {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(0,0,0,0.6); 
+            opacity: 0; 
+            visibility: hidden;
+            transition: all 0.4s ease; 
+            z-index: 1500;
+        }
+
+        .nav-overlay.active { opacity: 1; visibility: visible; }
+
+        .nav-item {
+            color: #ffffff; 
+            text-decoration: none; 
+            font-size: 1.4rem;
+            font-weight: 500; 
+            padding: 1.2rem 0; 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover { color: #25D366; padding-left: 1rem; }
+
+        .flag { width: 24px; height: 18px; border-radius: 2px; }
+
+        /* Professional Content Layout */
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 0 1.5rem; 
+            flex: 1; 
+        }
+        
+        .hero { 
+            text-align: center; 
+            padding: 4rem 0 3rem; 
+        }
+        
+        .hero h1 { 
+            font-size: clamp(2.2rem, 6vw, 3.2rem); 
+            color: #ffffff; 
+            margin-bottom: 1rem; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            font-weight: 700;
+        }
+
+        /* Clean Professional Cards */
+        .content-card {
+            background: rgba(255, 255, 255, 0.15); 
+            backdrop-filter: blur(25px);
+            border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 3rem 2.5rem; 
+            margin-bottom: 2rem; 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9); 
+            background: rgba(255, 255, 255, 0.22); 
+        }
+
+        .section-title { 
+            font-size: 1.8rem; 
+            color: #ffffff; 
+            margin-bottom: 2rem; 
+            font-weight: 600; 
+            text-align: center;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+        }
+
+        .content-text {
+            font-size: 1.15rem; 
+            color: rgba(255,255,255,0.98);
+            line-height: 1.8; 
+            margin-bottom: 1.8rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            max-width: 70ch;
+        }
+
+        .content-text:last-child { margin-bottom: 0; }
+
+        .content-text strong { 
+            color: #ffffff; 
+            font-weight: 700; 
+        }
+
+        /* Professional Disclaimer Section */
+        .disclaimer-card {
+            background: rgba(0, 0, 0, 0.4); 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px; 
+            padding: 2.5rem; 
+            margin-top: 2rem;
+        }
+
+        .disclaimer-card h3 {
+            color: #ffffff; 
+            font-size: 1.6rem; 
+            margin-bottom: 2rem;
+            font-weight: 600; 
+            text-align: center;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .disclaimer-grid {
+            display: grid;
+            gap: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        .disclaimer-item {
+            padding: 1.2rem;
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            border-left: 4px solid rgba(255,255,255,0.4);
+            transition: all 0.2s ease;
+        }
+
+        .disclaimer-item:hover {
+            background: rgba(255,255,255,0.15);
+            border-left-color: rgba(255,255,255,0.6);
+        }
+
+        .disclaimer-item strong {
+            color: #ffffff;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Professional CTA */
+        .whatsapp-btn {
+            display: block; 
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white; 
+            padding: 1.2rem 2.5rem; 
+            border-radius: 50px;
+            text-decoration: none; 
+            font-weight: 600; 
+            margin: 2rem auto 0; 
+            width: fit-content; 
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease; 
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px); 
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8); 
+            backdrop-filter: blur(20px); 
+            color: rgba(255,255,255,0.95); 
+            text-align: center;
+            padding: 2rem; 
+            margin-top: auto; 
+        }
+
+        .footer-logo {
+            font-size: 1.2rem; 
+            font-weight: 600; 
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            gap: 0.5rem; 
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-card, .disclaimer-card { 
+                margin: 1rem; 
+                padding: 2rem 1.5rem; 
+            }
+            .flag { width: 20px; height: 15px; }
+            .nav-menu { max-width: 300px; }
+            .disclaimer-grid { grid-template-columns: 1fr; }
+            .content-text { font-size: 1.05rem; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-overlay" id="navOverlay"></div>
+    
+    <header>
+        <nav>
+            <div class="logo">
+                Kasi-Made Webz <img src="https://flagcdn.com/w20/za.png" alt="🇿🇦" class="flag">
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-item">🏠 Home</a>
+        <a href="about.html" class="nav-item">ℹ️ About</a>
+    </div>
+
+    <div class="container">
+        <section class="hero">
+            <h1>About Kasi-Made Webz 🇿🇦</h1>
+        </section>
+
+        <div class="content-card">
+            <h2 class="section-title">Our Service</h2>
+            
+            <p class="content-text">
+                Kasi-Made Webz is an <strong>individual run independent</strong> website creation service.
+            </p>
+            
+            <p class="content-text">
+                My websites are like <strong>static pages</strong> and put only necessary information on display. 
+                My websites do not include any CMS so in order to make changes you need to <strong>get in-touch with me</strong>.
+            </p>
+            
+            <p class="content-text">
+                Websites are made using <strong>basic code</strong> then made online through a free web-hosting service 
+                <strong>GitHub Pages</strong>. <strong>Once client purchases domain they can contact me so that I make the website online for them.</strong> 
+                Example: a website name ending with <strong>(.co.za)</strong> costs <strong>R45.00 per year</strong>.
+            </p>
+            
+            <a href="https://wa.me/27663925666?text=Hi%2C%20tell%20me%20more%20about%20your%20service" class="whatsapp-btn">
+                Contact Developer
+            </a>
+        </div>
+
+        <div class="disclaimer-card">
+            <h3>Important Service Information</h3>
+            <div class="disclaimer-grid">
+                <div class="disclaimer-item">
+                    <strong>Static Websites Only:</strong> No CMS, databases, or dynamic content. Updates require developer contact.
+                </div>
+                <div class="disclaimer-item">
+                    <strong>Domain Setup:</strong> Client purchases domain, then contact me for deployment.
+                </div>
+                <div class="disclaimer-item">
+                    <strong>Base Price R250:</strong> Covers website creation only. Updates charged separately.
+                </div>
+                <div class="disclaimer-item">
+                    <strong>GitHub Pages:</strong> Free hosting subject to GitHub's terms of service.
+                </div>
+                <div class="disclaimer-item">
+                    <strong>Custom Work:</strong> Non-refundable once delivered.
+                </div>
+                <div class="disclaimer-item">
+                    <strong>Service Rights:</strong> Developer reserves right to refuse service.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">
+            KasiMadeWebz <img src="https://flagcdn.com/w20/za.png" alt="🇿🇦" class="flag">
+        </div>
+        <p>© 2026 - Proudly South African</p>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const navOverlay = document.getElementById('navOverlay');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+        });
+
+        navOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            navOverlay.classList.remove('active');
+        });
+
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                navOverlay.classList.remove('active');
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.content-card, .disclaimer-card').forEach(el => {
+            el.style.opacity = '0'; 
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease'; 
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
